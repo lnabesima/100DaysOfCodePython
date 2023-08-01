@@ -14,4 +14,5 @@ while True:
 
 total_bill_with_tip = total_bill * (1 + tip_percentage / 100)
 total_for_each_person = round(total_bill_with_tip / people_paying, 2)
-print(f"Each person should pay: ${total_for_each_person}.")
+total_for_each_person_two_decimals= "{:.2f}".format(total_for_each_person)
+print(f"Each person should pay: ${total_for_each_person_two_decimals}.")
