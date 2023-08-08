@@ -16,13 +16,15 @@ end_game = "_" not in display
 
 print(f'\nThe secret word is: {" ".join(display)}')
 
+guessed_letters = []
 while not end_game:
     while True:
         guess = input("Guess a letter from the word: ").lower()
-        if guess in display:
+        if guess in guessed_letters:
             print("You already guessed that letter.")
             continue
         elif len(guess) == 1:
+            guessed_letters.append(guess)
             break
         print("Please input a single letter.")
         continue
