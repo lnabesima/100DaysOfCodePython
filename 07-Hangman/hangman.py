@@ -21,8 +21,8 @@ while True:
     print("Please input a single letter.")
     continue
 
-for letter in chosen_word:
+for index, letter in enumerate(chosen_word):
     if letter == guess:
-        print("Correct guess!")
-    else:
-        print("Wrong guess!")
+        display[index] = letter
+
+print(display)
