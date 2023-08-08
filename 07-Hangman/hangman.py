@@ -1,67 +1,12 @@
 import random
 
-stages = ['''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
+import hangman_art
+from hangman_words import word_list
 
-word_list = ["aardvark", "baboon", "camel"]
 chosen_word = random.choice(word_list)
 lives = 6
-# Testing code
-print(f'Pssst, the solution is {chosen_word}.')
+
+print(hangman_art.logo)
 
 display = []
 for letter in chosen_word:
@@ -69,11 +14,15 @@ for letter in chosen_word:
 
 end_game = "_" not in display
 
-print(display)
+print(f'\nThe secret word is: {" ".join(display)}')
+
 while not end_game:
     while True:
         guess = input("Guess a letter from the word: ").lower()
-        if len(guess) == 1:
+        if guess in display:
+            print("You already guessed that letter.")
+            continue
+        elif len(guess) == 1:
             break
         print("Please input a single letter.")
         continue
@@ -84,15 +33,16 @@ while not end_game:
 
     display_string = " ".join(display)
 
-    print(stages[lives])
+    print(hangman_art.stages[lives])
     print(display_string)
     if guess not in chosen_word:
+        print(f"The letter {guess} is not in the secret word. The man is one step closer to be hung!")
         lives -= 1
         if lives == 0:
-            print(stages[lives])
-            print("You lost the game!")
+            print(hangman_art.stages[lives])
+            print(f"You lost the game! The secret word was {chosen_word}.")
             end_game = True
 
     if "_" not in display:
-        print("You won the game!")
+        print("A winner is you!")
         end_game = True
