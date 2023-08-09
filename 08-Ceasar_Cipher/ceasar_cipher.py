@@ -9,12 +9,15 @@ def caesar_cipher(text_to_transform, shift_amount, selected_direction):
     if selected_direction not in direction_options:
         print("Invalid direction. Please enter either 'encode' or 'decode'.")
         return
+    if selected_direction == 'decode':
+        shift_amount *= -1
     for letter in text_to_transform:
         if letter in alphabet:
             current_letter = alphabet.index(letter)
-            shifted_letter = (current_letter + shift_amount) % alphabet_length if selected_direction == 'encode' else \
-                current_letter - shift_amount
+            shifted_letter = (current_letter + shift_amount) % alphabet_length
             new_text += alphabet[shifted_letter]
+        else:
+            new_text += letter
     print(new_text)
 
 
